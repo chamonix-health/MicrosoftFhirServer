@@ -894,7 +894,7 @@ CREATE TABLE dbo.ResourceChangeData (
 ) ON PartitionScheme_ResourceChangeData_Timestamp (Timestamp);
 
 CREATE CLUSTERED INDEX IXC_ResourceChangeData
-    ON dbo.ResourceChangeData(Id ASC) WITH (ONLINE = ON)
+    ON dbo.ResourceChangeData(Id ASC) WITH (ONLINE = OFF)
     ON PartitionScheme_ResourceChangeData_Timestamp (Timestamp);
 
 CREATE TABLE dbo.ResourceChangeDataStaging (
@@ -907,7 +907,7 @@ CREATE TABLE dbo.ResourceChangeDataStaging (
 ) ON [PRIMARY];
 
 CREATE CLUSTERED INDEX IXC_ResourceChangeDataStaging
-    ON dbo.ResourceChangeDataStaging(Id ASC, Timestamp ASC) WITH (ONLINE = ON)
+    ON dbo.ResourceChangeDataStaging(Id ASC, Timestamp ASC) WITH (ONLINE = OFF)
     ON [PRIMARY];
 
 ALTER TABLE dbo.ResourceChangeDataStaging WITH CHECK

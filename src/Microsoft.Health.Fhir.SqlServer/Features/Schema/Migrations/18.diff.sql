@@ -82,7 +82,7 @@ WITH
 (
     DATA_COMPRESSION = PAGE,
     DROP_EXISTING = ON,
-    ONLINE = ON
+    ONLINE = OFF
 )
 ON [PartitionScheme_ResourceTypeId](ResourceTypeId)
 
@@ -104,7 +104,7 @@ WITH
 (
     DATA_COMPRESSION = PAGE,
     DROP_EXISTING = ON,
-    ONLINE = ON
+    ONLINE = OFF
 )
 ON [PartitionScheme_ResourceTypeId](ResourceTypeId)
 
@@ -184,7 +184,7 @@ WHERE IsHistory = 0
 WITH 
 (
     DROP_EXISTING = ON,
-    ONLINE = ON
+    ONLINE = OFF
 )
 ON [PartitionScheme_ResourceTypeId](ResourceTypeId)
 
@@ -207,7 +207,7 @@ WHERE IsHistory = 0
 WITH 
 (
     DROP_EXISTING = ON,
-    ONLINE = ON
+    ONLINE = OFF
 )
 ON [PartitionScheme_ResourceTypeId](ResourceTypeId)
 
@@ -229,7 +229,7 @@ WHERE IsHistory = 0 AND IsLongerThanADay = 1
 WITH 
 (
     DROP_EXISTING = ON,
-    ONLINE = ON
+    ONLINE = OFF
 )
 ON [PartitionScheme_ResourceTypeId](ResourceTypeId)
 
@@ -251,7 +251,7 @@ WHERE IsHistory = 0 AND IsLongerThanADay = 1
 WITH 
 (
     DROP_EXISTING = ON,
-    ONLINE = ON
+    ONLINE = OFF
 )
 ON [PartitionScheme_ResourceTypeId](ResourceTypeId)
 

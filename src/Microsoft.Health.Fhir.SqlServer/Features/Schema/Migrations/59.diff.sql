@@ -2,7 +2,7 @@ IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = object_id('Resource')
   ALTER TABLE dbo.Resource ADD HistoryTransactionId bigint NULL
 GO
 IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('Resource') AND name = 'IX_ResourceTypeId_HistoryTransactionId')
-  CREATE INDEX IX_ResourceTypeId_HistoryTransactionId ON dbo.Resource (ResourceTypeId, HistoryTransactionId) WHERE HistoryTransactionId IS NOT NULL WITH (ONLINE = ON) ON PartitionScheme_ResourceTypeId (ResourceTypeId)
+  CREATE INDEX IX_ResourceTypeId_HistoryTransactionId ON dbo.Resource (ResourceTypeId, HistoryTransactionId) WHERE HistoryTransactionId IS NOT NULL WITH (ONLINE = OFF) ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 GO
 IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = object_id('Transactions') AND name = 'InvisibleHistoryRemovedDate')
 BEGIN

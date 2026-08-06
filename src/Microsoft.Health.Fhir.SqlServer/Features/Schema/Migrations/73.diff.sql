@@ -36,7 +36,7 @@ BEGIN TRY
        ,ResourceSurrogateId
        ,ResourceTypeId
       )
-      WITH (DATA_COMPRESSION = PAGE, ONLINE = ON)
+      WITH (DATA_COMPRESSION = PAGE, ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('ReferenceSearchParam_Table') AND name = 'IX_ReferenceSearchParam_SearchParamId_ReferenceResourceTypeId_ReferenceResourceId_BaseUri_ReferenceResourceVersion')
@@ -57,7 +57,7 @@ BEGIN TRY
 		  IsMin,
 		  IsMax
 	  )
-      WITH (ONLINE = ON)
+      WITH (ONLINE = OFF)
 	  ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('DateTimeSearchParam_Table') AND name = 'IX_DateTimeSearchParam_SearchParamId_StartDateTime_EndDateTime')
@@ -77,7 +77,7 @@ BEGIN TRY
 		  IsMin,
 		  IsMax
 	  )
-      WITH (ONLINE = ON)
+      WITH (ONLINE = OFF)
 	  ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('DateTimeSearchParam_Table') AND name = 'IX_DateTimeSearchParam_SearchParamId_EndDateTime_StartDateTime')
@@ -97,7 +97,7 @@ BEGIN TRY
 		  IsMax
 	  )
 	  WHERE IsLongerThanADay = 1
-      WITH (ONLINE = ON)
+      WITH (ONLINE = OFF)
 	  ON PartitionScheme_ResourceTypeId(ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('DateTimeSearchParam_Table') AND name = 'IX_DateTimeSearchParam_SearchParamId_StartDateTime_EndDateTime_Long')
@@ -117,7 +117,7 @@ BEGIN TRY
 		  IsMax
 	  )
 	  WHERE IsLongerThanADay = 1
-      WITH (ONLINE = ON)
+      WITH (ONLINE = OFF)
 	  ON PartitionScheme_ResourceTypeId(ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('DateTimeSearchParam_Table') AND name = 'IX_DateTimeSearchParam_SearchParamId_EndDateTime_StartDateTime_Long')
@@ -132,7 +132,7 @@ BEGIN TRY
 		  SingleValue
 	  )
 	  WHERE SingleValue IS NOT NULL
-      WITH (ONLINE = ON)
+      WITH (ONLINE = OFF)
 	  ON PartitionScheme_ResourceTypeId(ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('NumberSearchParam_Table') AND name = 'IX_NumberSearchParam_SearchParamId_SingleValue')
@@ -146,7 +146,7 @@ BEGIN TRY
 		  LowValue,
 		  HighValue
 	  )
-	  WITH (ONLINE = ON)
+	  WITH (ONLINE = OFF)
 	  ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('NumberSearchParam_Table') AND name = 'IX_NumberSearchParam_SearchParamId_LowValue_HighValue')
@@ -161,7 +161,7 @@ BEGIN TRY
 		  HighValue,
 		  LowValue
 	  )
-	  WITH (ONLINE = ON)
+	  WITH (ONLINE = OFF)
 	  ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('NumberSearchParam_Table') AND name = 'IX_NumberSearchParam_SearchParamId_HighValue_LowValue')
@@ -182,7 +182,7 @@ BEGIN TRY
           SystemId
       )
       WHERE SingleValue IS NOT NULL
-      WITH (ONLINE = ON)
+      WITH (ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('QuantitySearchParam_Table') AND name = 'IX_QuantitySearchParam_SearchParamId_QuantityCodeId_SingleValue')
@@ -201,7 +201,7 @@ BEGIN TRY
       (
           SystemId
       )
-      WITH (ONLINE = ON)
+      WITH (ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('QuantitySearchParam_Table') AND name = 'IX_QuantitySearchParam_SearchParamId_QuantityCodeId_LowValue_HighValue')
@@ -220,7 +220,7 @@ BEGIN TRY
       (
           SystemId
       )
-      WITH (ONLINE = ON)
+      WITH (ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('QuantitySearchParam_Table') AND name = 'IX_QuantitySearchParam_SearchParamId_QuantityCodeId_HighValue_LowValue')
@@ -242,7 +242,7 @@ BEGIN TRY
           BaseUri1,
           SystemId2
       )
-      WITH (DATA_COMPRESSION = PAGE, ONLINE = ON)
+      WITH (DATA_COMPRESSION = PAGE, ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('ReferenceTokenCompositeSearchParam_Table') AND name = 'IX_ReferenceTokenCompositeSearchParam_ReferenceResourceId1_Code2')
@@ -263,7 +263,7 @@ BEGIN TRY
           IsMin,
           IsMax
       )
-      WITH (DATA_COMPRESSION = PAGE, ONLINE = ON)
+      WITH (DATA_COMPRESSION = PAGE, ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('StringSearchParam_Table') AND name = 'IX_StringSearchParam_SearchParamId_Text')
@@ -283,7 +283,7 @@ BEGIN TRY
           IsMax
       )
       WHERE TextOverflow IS NOT NULL
-      WITH (DATA_COMPRESSION = PAGE, ONLINE = ON)
+      WITH (DATA_COMPRESSION = PAGE, ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('StringSearchParam_Table') AND name = 'IX_StringSearchParam_SearchParamId_TextWithOverflow')
@@ -304,7 +304,7 @@ BEGIN TRY
           SystemId1,
           IsLongerThanADay2
       )
-      WITH (DATA_COMPRESSION = PAGE, ONLINE = ON)
+      WITH (DATA_COMPRESSION = PAGE, ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId(ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('TokenDateTimeCompositeSearchParam_Table') AND name = 'IX_TokenDateTimeCompositeSearchParam_Code1_StartDateTime2_EndDateTime2')
@@ -324,7 +324,7 @@ BEGIN TRY
           SystemId1,
           IsLongerThanADay2
       )
-      WITH (DATA_COMPRESSION = PAGE, ONLINE = ON)
+      WITH (DATA_COMPRESSION = PAGE, ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('TokenDateTimeCompositeSearchParam_Table') AND name = 'IX_TokenDateTimeCompositeSearchParam_Code1_EndDateTime2_StartDateTime2')
@@ -344,7 +344,7 @@ BEGIN TRY
           SystemId1
       )
       WHERE IsLongerThanADay2 = 1
-      WITH (DATA_COMPRESSION = PAGE, ONLINE = ON)
+      WITH (DATA_COMPRESSION = PAGE, ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('TokenDateTimeCompositeSearchParam_Table') AND name = 'IX_TokenDateTimeCompositeSearchParam_Code1_StartDateTime2_EndDateTime2_Long')
@@ -364,7 +364,7 @@ BEGIN TRY
           SystemId1
       )
       WHERE IsLongerThanADay2 = 1
-      WITH (DATA_COMPRESSION = PAGE, ONLINE = ON)
+      WITH (DATA_COMPRESSION = PAGE, ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('TokenDateTimeCompositeSearchParam_Table') AND name = 'IX_TokenDateTimeCompositeSearchParam_Code1_EndDateTime2_StartDateTime2_Long')
@@ -385,7 +385,7 @@ BEGIN TRY
           SystemId1
       )
       WHERE HasRange = 0
-      WITH (DATA_COMPRESSION = PAGE, ONLINE = ON)
+      WITH (DATA_COMPRESSION = PAGE, ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('TokenNumberNumberCompositeSearchParam_Table') AND name = 'IX_TokenNumberNumberCompositeSearchParam_SearchParamId_Code1_Text2')
@@ -407,7 +407,7 @@ BEGIN TRY
           SystemId1
       )
       WHERE HasRange = 1
-      WITH (DATA_COMPRESSION = PAGE, ONLINE = ON)
+      WITH (DATA_COMPRESSION = PAGE, ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('TokenNumberNumberCompositeSearchParam_Table') AND name = 'IX_TokenNumberNumberCompositeSearchParam_SearchParamId_Code1_LowValue2_HighValue2_LowValue3_HighValue3')
@@ -429,7 +429,7 @@ BEGIN TRY
           SystemId2
       )
       WHERE SingleValue2 IS NOT NULL
-      WITH (DATA_COMPRESSION = PAGE, ONLINE = ON)
+      WITH (DATA_COMPRESSION = PAGE, ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('TokenQuantityCompositeSearchParam_Table') AND name = 'IX_TokenQuantityCompositeSearchParam_SearchParamId_Code1_QuantityCodeId2_SingleValue2')
@@ -451,7 +451,7 @@ BEGIN TRY
           SystemId2
       )
       WHERE LowValue2 IS NOT NULL
-      WITH (DATA_COMPRESSION = PAGE, ONLINE = ON)
+      WITH (DATA_COMPRESSION = PAGE, ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('TokenQuantityCompositeSearchParam_Table') AND name = 'IX_TokenQuantityCompositeSearchParam_SearchParamId_Code1_QuantityCodeId2_LowValue2_HighValue2')
@@ -473,7 +473,7 @@ BEGIN TRY
           SystemId2
       )
       WHERE LowValue2 IS NOT NULL
-      WITH (DATA_COMPRESSION = PAGE, ONLINE = ON)
+      WITH (DATA_COMPRESSION = PAGE, ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('TokenQuantityCompositeSearchParam_Table') AND name = 'IX_TokenQuantityCompositeSearchParam_SearchParamId_Code1_QuantityCodeId2_HighValue2_LowValue2')
@@ -493,7 +493,7 @@ BEGIN TRY
           SystemId1,
           TextOverflow2 -- will not be needed when all servers are targeting at least this version. TODO: What?
       )
-      WITH (DATA_COMPRESSION = PAGE, ONLINE = ON)
+      WITH (DATA_COMPRESSION = PAGE, ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('TokenStringCompositeSearchParam_Table') AND name = 'IX_TokenStringCompositeSearchParam_SearchParamId_Code1_Text2')
@@ -512,7 +512,7 @@ BEGIN TRY
           SystemId1
       )
       WHERE TextOverflow2 IS NOT NULL
-      WITH (DATA_COMPRESSION = PAGE, ONLINE = ON)
+      WITH (DATA_COMPRESSION = PAGE, ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('TokenStringCompositeSearchParam_Table') AND name = 'IX_TokenStringCompositeSearchParam_SearchParamId_Code1_Text2WithOverflow')
@@ -532,7 +532,7 @@ BEGIN TRY
           SystemId1,
           SystemId2
       )
-      WITH (DATA_COMPRESSION = PAGE, ONLINE = ON)
+      WITH (DATA_COMPRESSION = PAGE, ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('TokenTokenCompositeSearchParam_Table') AND name = 'IX_TokenTokenCompositeSearchParam_Code1_Code2')
@@ -546,7 +546,7 @@ BEGIN TRY
           SearchParamId,
           Uri
       )
-      WITH (DATA_COMPRESSION = PAGE, ONLINE = ON)
+      WITH (DATA_COMPRESSION = PAGE, ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId (ResourceTypeId)
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('UriSearchParam_Table') AND name = 'IX_UriSearchParam_SearchParamId_Uri')
@@ -564,7 +564,7 @@ BEGIN TRY
       (
           SystemId
       ) 
-      WITH (DATA_COMPRESSION = PAGE, ONLINE = ON)
+      WITH (DATA_COMPRESSION = PAGE, ONLINE = OFF)
       ON PartitionScheme_ResourceTypeId (ResourceTypeId);
 
   IF EXISTS (SELECT * FROM sys.indexes WHERE object_id = object_id('TokenSearchParam_Table') AND name = 'IX_TokenSeachParam_SearchParamId_Code_SystemId')

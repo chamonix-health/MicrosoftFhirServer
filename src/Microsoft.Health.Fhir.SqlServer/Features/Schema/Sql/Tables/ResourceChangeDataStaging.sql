@@ -10,7 +10,7 @@ CREATE TABLE dbo.ResourceChangeDataStaging
 ) ON [PRIMARY];
 
 CREATE CLUSTERED INDEX IXC_ResourceChangeDataStaging ON dbo.ResourceChangeDataStaging
-    (Id ASC, Timestamp ASC) WITH(ONLINE = ON) ON [PRIMARY];
+    (Id ASC, Timestamp ASC) WITH(ONLINE = OFF) ON [PRIMARY];
 
 /* Adds a check constraint on the staging table for a partition boundary validation. */
 ALTER TABLE dbo.ResourceChangeDataStaging WITH CHECK 

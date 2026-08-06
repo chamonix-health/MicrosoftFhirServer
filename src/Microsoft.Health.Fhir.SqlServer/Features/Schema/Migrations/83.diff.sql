@@ -215,7 +215,7 @@ BEGIN TRY
            + CASE WHEN @IsPartitioned = 1 THEN ' PARTITION = '+convert(varchar,@PartitionNumber) ELSE '' END
            + CASE 
                WHEN @Operation = 'REBUILD'
-                 THEN ' WITH (ONLINE = ON'
+                 THEN ' WITH (ONLINE = OFF'
                       + CASE WHEN EXISTS (SELECT * FROM sys.partitions WHERE object_id = object_id(@TableName) AND index_id = @IndexId AND data_compression_desc = 'PAGE') THEN ', DATA_COMPRESSION = PAGE' ELSE '' END
                       + ')'
                ELSE ''

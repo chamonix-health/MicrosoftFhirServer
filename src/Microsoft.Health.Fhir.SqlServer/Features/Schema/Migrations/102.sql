@@ -645,7 +645,7 @@ CREATE TABLE dbo.ResourceChangeData (
 ) ON PartitionScheme_ResourceChangeData_Timestamp (Timestamp);
 
 CREATE CLUSTERED INDEX IXC_ResourceChangeData
-    ON dbo.ResourceChangeData(Id ASC) WITH (ONLINE = ON)
+    ON dbo.ResourceChangeData(Id ASC) WITH (ONLINE = OFF)
     ON PartitionScheme_ResourceChangeData_Timestamp (Timestamp);
 
 CREATE TABLE dbo.ResourceChangeDataStaging (
@@ -658,7 +658,7 @@ CREATE TABLE dbo.ResourceChangeDataStaging (
 ) ON [PRIMARY];
 
 CREATE CLUSTERED INDEX IXC_ResourceChangeDataStaging
-    ON dbo.ResourceChangeDataStaging(Id ASC, Timestamp ASC) WITH (ONLINE = ON)
+    ON dbo.ResourceChangeDataStaging(Id ASC, Timestamp ASC) WITH (ONLINE = OFF)
     ON [PRIMARY];
 
 ALTER TABLE dbo.ResourceChangeDataStaging WITH CHECK
@@ -1519,7 +1519,7 @@ BEGIN TRY
                     FROM   sys.indexes
                     WHERE  object_id = object_id(@TableName)
                            AND name = @IndexName);
-    SET @Sql = 'ALTER INDEX ' + quotename(@IndexName) + ' ON dbo.' + quotename(@TableName) + ' ' + @Operation + CASE WHEN @IsPartitioned = 1 THEN ' PARTITION = ' + CONVERT (VARCHAR, @PartitionNumber) ELSE '' END + CASE WHEN @Operation = 'REBUILD' THEN ' WITH (ONLINE = ON' + CASE WHEN EXISTS (SELECT *
+    SET @Sql = 'ALTER INDEX ' + quotename(@IndexName) + ' ON dbo.' + quotename(@TableName) + ' ' + @Operation + CASE WHEN @IsPartitioned = 1 THEN ' PARTITION = ' + CONVERT (VARCHAR, @PartitionNumber) ELSE '' END + CASE WHEN @Operation = 'REBUILD' THEN ' WITH (ONLINE = OFF' + CASE WHEN EXISTS (SELECT *
                                                                                                                                                                                                                                                                                                      FROM   sys.partitions
                                                                                                                                                                                                                                                                                                      WHERE  object_id = object_id(@TableName)
                                                                                                                                                                                                                                                                                                             AND index_id = @IndexId

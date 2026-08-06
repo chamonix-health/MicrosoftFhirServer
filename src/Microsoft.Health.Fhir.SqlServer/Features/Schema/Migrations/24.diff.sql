@@ -99,10 +99,10 @@ IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'PK_ResourceChangeData_Timesta
 BEGIN
     EXEC dbo.LogSchemaMigrationProgress 'Deleting PK_ResourceChangeData_TimestampId index from ResourceChangeData table.';
 
-    /* Drops PK_ResourceChangeData_TimestampId index. "ONLINE = ON" indicates long-term table locks aren't held for the duration of the index operation. 
+    /* Drops PK_ResourceChangeData_TimestampId index. "ONLINE = OFF" indicates long-term table locks aren't held for the duration of the index operation. 
        During the main phase of the index operation, only an Intent Share (IS) lock is held on the source table. 
        This behavior enables queries or updates to the underlying table and indexes to continue. */
-    ALTER TABLE dbo.ResourceChangeData DROP CONSTRAINT PK_ResourceChangeData_TimestampId WITH(ONLINE = ON);
+    ALTER TABLE dbo.ResourceChangeData DROP CONSTRAINT PK_ResourceChangeData_TimestampId WITH(ONLINE = OFF);
 END;
 GO
 
@@ -110,10 +110,10 @@ IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'PK_ResourceChangeDataStaging_
 BEGIN
     EXEC dbo.LogSchemaMigrationProgress 'Deleting PK_ResourceChangeDataStaging_TimestampId index from ResourceChangeDataStaging table.';
 
-    /* Drops PK_ResourceChangeDataStaging_TimestampId index. "ONLINE = ON" indicates long-term table locks aren't held for the duration of the index operation. 
+    /* Drops PK_ResourceChangeDataStaging_TimestampId index. "ONLINE = OFF" indicates long-term table locks aren't held for the duration of the index operation. 
        During the main phase of the index operation, only an Intent Share (IS) lock is held on the source table. 
        This behavior enables queries or updates to the underlying table and indexes to continue. */
-    ALTER TABLE dbo.ResourceChangeDataStaging DROP CONSTRAINT PK_ResourceChangeDataStaging_TimestampId WITH(ONLINE = ON);
+    ALTER TABLE dbo.ResourceChangeDataStaging DROP CONSTRAINT PK_ResourceChangeDataStaging_TimestampId WITH(ONLINE = OFF);
 END;
 GO
 
@@ -121,7 +121,7 @@ IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IXC_ResourceChangeData')
 BEGIN
     EXEC dbo.LogSchemaMigrationProgress 'Creating IXC_ResourceChangeData index on ResourceChangeData table.';
 
-    /* Adds a clustered index on ResourceChangeData table. "ONLINE = ON" indicates long-term table locks aren't held for the duration of the index operation. 
+    /* Adds a clustered index on ResourceChangeData table. "ONLINE = OFF" indicates long-term table locks aren't held for the duration of the index operation. 
        During the main phase of the index operation, only an Intent Share (IS) lock is held on the source table. 
        This behavior enables queries or updates to the underlying table and indexes to continue. 
        Creating a non-primary key and non-unique clustered index to have a better performance on the fetch query.
@@ -132,7 +132,7 @@ BEGIN
        To enforce global uniqueness requires a non clustered index without a partition but which prevents partition swaps.
        We are using identity which will guarantee uniqueness unless an identity insert is used or reseed identity value on the table which shouldn't happen. */
     CREATE CLUSTERED INDEX IXC_ResourceChangeData ON dbo.ResourceChangeData
-        (Id ASC) WITH(ONLINE = ON) ON PartitionScheme_ResourceChangeData_Timestamp(Timestamp);
+        (Id ASC) WITH(ONLINE = OFF) ON PartitionScheme_ResourceChangeData_Timestamp(Timestamp);
 END;
 GO
 
@@ -140,11 +140,11 @@ IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IXC_ResourceChangeDataSta
 BEGIN
     EXEC dbo.LogSchemaMigrationProgress 'Creating IXC_ResourceChangeDataStaging index on ResourceChangeDataStaging table.';
 
-    /* Adds a clustered index on ResourceChangeDataStaging table. "ONLINE = ON" indicates long-term table locks aren't held for the duration of the index operation. 
+    /* Adds a clustered index on ResourceChangeDataStaging table. "ONLINE = OFF" indicates long-term table locks aren't held for the duration of the index operation. 
        During the main phase of the index operation, only an Intent Share (IS) lock is held on the source table. 
        This behavior enables queries or updates to the underlying table and indexes to continue. */
     CREATE CLUSTERED INDEX IXC_ResourceChangeDataStaging ON dbo.ResourceChangeDataStaging
-        (Id ASC, Timestamp ASC) WITH(ONLINE = ON) ON [PRIMARY];
+        (Id ASC, Timestamp ASC) WITH(ONLINE = OFF) ON [PRIMARY];
 END;
 GO
 
