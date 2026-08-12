@@ -17,4 +17,4 @@ CREATE TABLE dbo.ResourceChangeData
    To enforce global uniqueness requires a non clustered index without a partition but which prevents partition swaps.
    We are using identity which will guarantee uniqueness unless an identity insert is used or reseed identity value on the table which shouldn't happen. */
 CREATE CLUSTERED INDEX IXC_ResourceChangeData ON dbo.ResourceChangeData
-    (Id ASC) WITH(ONLINE = ON) ON PartitionScheme_ResourceChangeData_Timestamp(Timestamp);
+    (Id ASC) WITH(ONLINE = OFF) ON PartitionScheme_ResourceChangeData_Timestamp(Timestamp);
